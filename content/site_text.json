@@ -77,7 +77,7 @@
     "body": "BirdNET can record the same bird more than once. These charts show detected calls, not a count of individual birds. Less certain matches are held back for checking."
   },
   "footer": {
-    "location": "North West Wales Garden · approximate location only",
-    "data": "Privacy-filtered data · refreshed every 10 minutes"
+    "location": "North West Wales Garden",
+    "data": "The data for this page is refreshed every 10 minutes"
   }
 }
