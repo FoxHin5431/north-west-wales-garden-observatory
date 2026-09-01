@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "generated_at": "2026-09-01T11:10:00+01:00",
+    "location_label": "North West Wales Garden",
+    "timezone": "Europe/London",
+    "demo": false
+  },
+  "summary": {
+    "detections_today": 251,
+    "species_today": 27,
+    "detections_last_hour": 18,
+    "species_7d": 34
+  },
+  "latest": {
+    "detected_at": "2026-09-01T11:07:00+01:00",
+    "common_name": "Robin",
+    "scientific_name": "Erithacus rubecula",
+    "confidence": 0.91,
+    "quality": "Strong"
+  },
+  "dawn": {
+    "civil_dawn": "2026-09-01T05:48:00+01:00",
+    "sunrise": "2026-09-01T06:25:00+01:00"
+  },
+  "weather": {
+    "observed_at": "2026-09-01T11:00:00+01:00",
+    "temperature": 15.8,
+    "humidity": 74,
+    "wind_speed": 3.2,
+    "condition": "Broken clouds"
+  },
+  "activity_hourly": [
+    {"hour":"2026-09-01T00:00:00+01:00","detections":1},{"hour":"2026-09-01T01:00:00+01:00","detections":0},{"hour":"2026-09-01T02:00:00+01:00","detections":1},{"hour":"2026-09-01T03:00:00+01:00","detections":2},{"hour":"2026-09-01T04:00:00+01:00","detections":5},{"hour":"2026-09-01T05:00:00+01:00","detections":19},{"hour":"2026-09-01T06:00:00+01:00","detections":47},{"hour":"2026-09-01T07:00:00+01:00","detections":56},{"hour":"2026-09-01T08:00:00+01:00","detections":42},{"hour":"2026-09-01T09:00:00+01:00","detections":38},{"hour":"2026-09-01T10:00:00+01:00","detections":27},{"hour":"2026-09-01T11:00:00+01:00","detections":18}
+  ],
+  "species_today": [
+    {"common_name":"Robin","scientific_name":"Erithacus rubecula","detections":45},{"common_name":"Blue Tit","scientific_name":"Cyanistes caeruleus","detections":37},{"common_name":"Great Tit","scientific_name":"Parus major","detections":31},{"common_name":"Blackbird","scientific_name":"Turdus merula","detections":29},{"common_name":"Wren","scientific_name":"Troglodytes troglodytes","detections":24},{"common_name":"Woodpigeon","scientific_name":"Columba palumbus","detections":20},{"common_name":"Goldcrest","scientific_name":"Regulus regulus","detections":16},{"common_name":"Nuthatch","scientific_name":"Sitta europaea","detections":12}
+  ],
+  "species_heatmap": [
+    {"common_name":"Robin","hour":"2026-09-01T05:00:00+01:00","detections":5},{"common_name":"Robin","hour":"2026-09-01T06:00:00+01:00","detections":14},{"common_name":"Robin","hour":"2026-09-01T07:00:00+01:00","detections":12},{"common_name":"Robin","hour":"2026-09-01T08:00:00+01:00","detections":8},{"common_name":"Blue Tit","hour":"2026-09-01T06:00:00+01:00","detections":6},{"common_name":"Blue Tit","hour":"2026-09-01T07:00:00+01:00","detections":11},{"common_name":"Blue Tit","hour":"2026-09-01T09:00:00+01:00","detections":9},{"common_name":"Great Tit","hour":"2026-09-01T06:00:00+01:00","detections":5},{"common_name":"Great Tit","hour":"2026-09-01T08:00:00+01:00","detections":10},{"common_name":"Great Tit","hour":"2026-09-01T10:00:00+01:00","detections":8},{"common_name":"Blackbird","hour":"2026-09-01T05:00:00+01:00","detections":9},{"common_name":"Blackbird","hour":"2026-09-01T06:00:00+01:00","detections":12},{"common_name":"Wren","hour":"2026-09-01T07:00:00+01:00","detections":8},{"common_name":"Wren","hour":"2026-09-01T09:00:00+01:00","detections":7}
+  ],
+  "quality_counts": [{"quality":"Strong","count":173},{"quality":"Probable","count":78}],
+  "trend_7d": [],
+  "recent": [
+    {"detected_at":"2026-09-01T11:07:00+01:00","common_name":"Robin","scientific_name":"Erithacus rubecula","confidence":0.91,"quality":"Strong"},
+    {"detected_at":"2026-09-01T11:02:00+01:00","common_name":"Blue Tit","scientific_name":"Cyanistes caeruleus","confidence":0.88,"quality":"Strong"},
+    {"detected_at":"2026-09-01T10:56:00+01:00","common_name":"Nuthatch","scientific_name":"Sitta europaea","confidence":0.82,"quality":"Probable"},
+    {"detected_at":"2026-09-01T10:48:00+01:00","common_name":"Goldcrest","scientific_name":"Regulus regulus","confidence":0.86,"quality":"Probable"},
+    {"detected_at":"2026-09-01T10:41:00+01:00","common_name":"Wren","scientific_name":"Troglodytes troglodytes","confidence":0.94,"quality":"Strong"}
+  ]
+}

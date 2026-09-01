@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Raw/local databases must never enter the public repository.
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# Audio and BirdNET media are private.
+*.aac
+*.flac
+*.m4a
+*.mp3
+*.ogg
+*.wav
+species_best/
+clips/
+
+# Local test and editor files.
+.pytest_cache/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+

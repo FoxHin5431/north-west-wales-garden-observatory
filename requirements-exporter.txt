@@ -1,0 +1,3 @@
+-r requirements.txt
+astral>=3.2,<4
+

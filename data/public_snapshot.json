@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "location_label": "North West Wales Garden",
+    "timezone": "Europe/London",
+    "demo": true
+  },
+  "summary": {},
+  "latest": null,
+  "dawn": {},
+  "weather": null,
+  "activity_hourly": [],
+  "species_today": [],
+  "species_heatmap": [],
+  "quality_counts": [],
+  "trend_7d": [],
+  "recent": []
+}
+

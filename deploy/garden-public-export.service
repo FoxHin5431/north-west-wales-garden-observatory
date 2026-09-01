@@ -1,0 +1,12 @@
+[Unit]
+Description=Export a privacy-safe garden observatory snapshot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=pi
+WorkingDirectory=/opt/garden-observatory-public
+EnvironmentFile=/etc/garden-observatory-public.env
+ExecStart=/opt/garden-observatory-public/scripts/publish_snapshot.sh
+
