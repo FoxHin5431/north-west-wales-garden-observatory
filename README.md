@@ -45,6 +45,8 @@ EXPORT_PYTHON=/path/to/python
 
 Never commit that environment file. `scripts/publish_snapshot.sh` updates only the public snapshot on a dedicated `data` branch. It amends one replaceable commit so ten-minute updates do not create an ever-growing Git history.
 
+On a Pi with user lingering enabled, the files in `deploy/user` can be copied to `~/.config/systemd/user/` and enabled without root access.
+
 ## Deploy on Streamlit Community Cloud
 
 1. Push this repository to GitHub.

@@ -8,4 +8,4 @@ Type=oneshot
 User=pi
 WorkingDirectory=/home/pi/garden-observatory-public
 EnvironmentFile=/home/pi/.config/garden-observatory-public.env
-ExecStart=/home/pi/garden-observatory-public/scripts/publish_snapshot.sh
+ExecStart=/usr/bin/bash /home/pi/garden-observatory-public/scripts/publish_snapshot.sh

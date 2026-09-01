@@ -25,6 +25,57 @@ BIRDNET_DB = Path(os.environ["BIRDNET_DB"])
 WEATHER_DB = Path(os.environ["WEATHER_DB"])
 OUTPUT_PATH = Path(os.getenv("PUBLIC_SNAPSHOT_PATH", "data/public_snapshot.json"))
 
+# BirdNET-Go installations do not all store localized names in the database.
+# Keep the garden's small, curated UK list as a display fallback; any species
+# not listed here remains available under its scientific name.
+COMMON_NAMES = {
+    "Larus argentatus": "Herring Gull",
+    "Sterna hirundo": "Common Tern",
+    "Erithacus rubecula": "Robin",
+    "Turdus merula": "Blackbird",
+    "Turdus iliacus": "Redwing",
+    "Parus major": "Great Tit",
+    "Cyanistes caeruleus": "Blue Tit",
+    "Periparus ater": "Coal Tit",
+    "Aegithalos caudatus": "Long-tailed Tit",
+    "Passer domesticus": "House Sparrow",
+    "Passer montanus": "Tree Sparrow",
+    "Sturnus vulgaris": "Starling",
+    "Troglodytes troglodytes": "Wren",
+    "Prunella modularis": "Dunnock",
+    "Fringilla coelebs": "Chaffinch",
+    "Chloris chloris": "Greenfinch",
+    "Carduelis carduelis": "Goldfinch",
+    "Spinus spinus": "Siskin",
+    "Pyrrhula pyrrhula": "Bullfinch",
+    "Columba palumbus": "Woodpigeon",
+    "Streptopelia decaocto": "Collared Dove",
+    "Corvus corone": "Carrion Crow",
+    "Corvus frugilegus": "Rook",
+    "Coloeus monedula": "Jackdaw",
+    "Pica pica": "Magpie",
+    "Garrulus glandarius": "Jay",
+    "Apus apus": "Swift",
+    "Hirundo rustica": "Barn Swallow",
+    "Delichon urbicum": "House Martin",
+    "Phylloscopus collybita": "Chiffchaff",
+    "Sylvia atricapilla": "Blackcap",
+    "Regulus regulus": "Goldcrest",
+    "Sitta europaea": "Nuthatch",
+    "Certhia familiaris": "Treecreeper",
+    "Dendrocopos major": "Great Spotted Woodpecker",
+    "Picus viridis": "Green Woodpecker",
+    "Tyto alba": "Barn Owl",
+    "Strix aluco": "Tawny Owl",
+    "Buteo buteo": "Common Buzzard",
+    "Falco tinnunculus": "Kestrel",
+    "Falco peregrinus": "Peregrine",
+    "Ardea cinerea": "Grey Heron",
+    "Haematopus ostralegus": "Oystercatcher",
+    "Numenius arquata": "Curlew",
+    "Vanellus vanellus": "Lapwing",
+}
+
 
 def readonly_connection(path: Path) -> sqlite3.Connection:
     connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
@@ -105,7 +156,8 @@ def load_detections(now: datetime) -> pd.DataFrame:
 
     result = pd.DataFrame([dict(row) for row in rows])
     result["dt"] = pd.to_datetime(result["detected_at"], unit="s", utc=True).dt.tz_convert(TIMEZONE_NAME)
-    result["common_name"] = result["common_name"].fillna(result["scientific_name"])
+    mapped_names = result["scientific_name"].map(COMMON_NAMES)
+    result["common_name"] = result["common_name"].fillna(mapped_names).fillna(result["scientific_name"])
     result["confidence"] = pd.to_numeric(result["confidence"], errors="coerce").fillna(0.0)
     result["unlikely"] = result["unlikely"].fillna(0).astype(bool)
 
