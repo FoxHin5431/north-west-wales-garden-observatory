@@ -37,12 +37,13 @@ BIRDNET_DB=/private/path/to/birdnet.db
 WEATHER_DB=/private/path/to/weather.db
 GARDEN_LATITUDE=<private latitude>
 GARDEN_LONGITUDE=<private longitude>
-PUBLIC_SNAPSHOT_PATH=/path/to/repository/data/public_snapshot.json
-PUBLIC_REPO_DIR=/path/to/repository
+PUBLIC_SNAPSHOT_PATH=/path/to/data-branch-clone/public_snapshot.json
+PUBLIC_REPO_DIR=/path/to/main-application-clone
+PUBLIC_DATA_REPO_DIR=/path/to/data-branch-clone
 EXPORT_PYTHON=/path/to/python
 ```
 
-Never commit that environment file. `scripts/publish_snapshot.sh` updates and pushes only the public snapshot.
+Never commit that environment file. `scripts/publish_snapshot.sh` updates only the public snapshot on a dedicated `data` branch. It amends one replaceable commit so ten-minute updates do not create an ever-growing Git history.
 
 ## Deploy on Streamlit Community Cloud
 
@@ -51,9 +52,14 @@ Never commit that environment file. `scripts/publish_snapshot.sh` updates and pu
 3. Set the entry point to `app.py`.
 4. Deploy. No Streamlit secrets are required for the public page.
 
-Each privacy-safe snapshot pushed by the garden monitor triggers Streamlit to update the app.
+The app checks the privacy-safe `data` branch every five minutes. The page itself refreshes every ten minutes.
+
+## Edit the page wording
+
+All visible headings and explanatory text live in [`content/site_text.json`](content/site_text.json). Edit that one file in GitHub and commit the change; Streamlit will update the page automatically.
+
+The content file is separate from the Python layout, so changing the wording cannot expose the private database, recordings, or coordinates. Keep the location description broad when editing it.
 
 ## Interpretation
 
 BirdNET detections measure acoustic activity. Multiple detections can come from one bird, so the figures must not be interpreted as abundance or individual bird counts.
-

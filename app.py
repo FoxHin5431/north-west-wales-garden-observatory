@@ -9,11 +9,17 @@ from typing import Any
 
 import altair as alt
 import pandas as pd
+import requests
 import streamlit as st
 
 
 APP_ROOT = Path(__file__).resolve().parent
 DATA_PATH = Path(os.getenv("GARDEN_DATA_PATH", APP_ROOT / "data" / "public_snapshot.json"))
+CONTENT_PATH = APP_ROOT / "content" / "site_text.json"
+PUBLIC_DATA_URL = os.getenv(
+    "GARDEN_DATA_URL",
+    "https://raw.githubusercontent.com/FoxHin5431/north-west-wales-garden-observatory/data/public_snapshot.json",
+)
 REFRESH_MS = 10 * 60 * 1000
 
 INK = "#213129"
@@ -40,7 +46,20 @@ def load_snapshot(path: str, modified_ns: int) -> dict[str, Any]:
         return json.load(handle)
 
 
+@st.cache_data(ttl=300, show_spinner=False)
+def load_remote_snapshot(url: str) -> dict[str, Any]:
+    response = requests.get(url, timeout=8)
+    response.raise_for_status()
+    return response.json()
+
+
 def snapshot() -> dict[str, Any]:
+    # An explicit local path is used for development and automated tests.
+    if "GARDEN_DATA_PATH" not in os.environ:
+        try:
+            return load_remote_snapshot(PUBLIC_DATA_URL)
+        except (requests.RequestException, ValueError):
+            pass
     try:
         stat = DATA_PATH.stat()
         return load_snapshot(str(DATA_PATH), stat.st_mtime_ns)
@@ -55,6 +74,26 @@ def snapshot() -> dict[str, Any]:
             "trend_7d": [],
             "recent": [],
         }
+
+
+@st.cache_data(show_spinner=False)
+def load_site_text(path: str, modified_ns: int) -> dict[str, Any]:
+    del modified_ns
+    with Path(path).open("r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def site_text() -> dict[str, Any]:
+    try:
+        stat = CONTENT_PATH.stat()
+        return load_site_text(str(CONTENT_PATH), stat.st_mtime_ns)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def wording(source: dict[str, Any], section: str, key: str, default: str) -> str:
+    value = source.get(section, {}).get(key, default)
+    return str(value) if value is not None else default
 
 
 def esc(value: Any) -> str:
@@ -364,23 +403,29 @@ setTimeout(function () {{ window.parent.location.reload(); }}, {REFRESH_MS});
 )
 
 data = snapshot()
+copy = site_text()
 meta = data.get("meta", {})
 summary = data.get("summary", {})
 location = meta.get("location_label") or "North West Wales Garden"
 generated_at = parse_time(meta.get("generated_at"))
 is_demo = bool(meta.get("demo", False))
 
-updated_label = "Waiting for live data" if generated_at is None else f"Updated {generated_at.strftime('%H:%M')}"
+updated_label = (
+    wording(copy, "status", "waiting", "Waiting for live data")
+    if generated_at is None
+    else f"{wording(copy, 'status', 'updated_prefix', 'Updated')} {generated_at.strftime('%H:%M')}"
+)
+hero_title = esc(wording(copy, "hero", "title", "Listening to\nthe garden.")).replace("\n", "<br>")
 st.markdown(
     f"""
 <section class="hero">
-  <div class="eyebrow"><span class="eyebrow-dot"></span>{esc(location)} · acoustic observatory</div>
-  <h1>Listening to<br>the garden.</h1>
-  <p class="hero-copy">A quiet record of the birds heard through the day, shaped by first light, weather and season.</p>
+  <div class="eyebrow"><span class="eyebrow-dot"></span>{esc(location)} · {esc(wording(copy, 'hero', 'eyebrow_suffix', 'acoustic observatory'))}</div>
+  <h1>{hero_title}</h1>
+  <p class="hero-copy">{esc(wording(copy, 'hero', 'description', 'Birds heard from a garden in North West Wales, recorded through the day.'))}</p>
   <div class="hero-meta">
-    <span class="chip">● Observatory live</span>
+    <span class="chip">● {esc(wording(copy, 'hero', 'live_chip', 'Observatory live'))}</span>
     <span class="chip">{esc(updated_label)}</span>
-    <span class="chip">Cleaned acoustic detections</span>
+    <span class="chip">{esc(wording(copy, 'hero', 'data_chip', 'Checked detections'))}</span>
   </div>
 </section>
 """,
@@ -388,13 +433,13 @@ st.markdown(
 )
 
 if is_demo:
-    st.info("The public observatory is ready. Live, privacy-filtered data will appear after the first export from the garden monitor.")
+    st.info(wording(copy, "status", "setup_message", "The page is ready. Data will appear after the first update."))
 
 metrics = [
-    (compact_number(summary.get("detections_today")), "Detections today", "Acoustic events, not individual birds"),
-    (compact_number(summary.get("species_today")), "Species today", "Distinct species in the cleaned view"),
-    (compact_number(summary.get("detections_last_hour")), "Last hour", "Recent acoustic activity"),
-    (compact_number(summary.get("species_7d")), "Species this week", "Rolling seven-day total"),
+    (compact_number(summary.get("detections_today")), wording(copy.get("metrics", {}), "detections_today", "label", "Detections today"), wording(copy.get("metrics", {}), "detections_today", "note", "Recorded calls, not individual birds")),
+    (compact_number(summary.get("species_today")), wording(copy.get("metrics", {}), "species_today", "label", "Species today"), wording(copy.get("metrics", {}), "species_today", "note", "Species in the checked results")),
+    (compact_number(summary.get("detections_last_hour")), wording(copy.get("metrics", {}), "detections_last_hour", "label", "Last hour"), wording(copy.get("metrics", {}), "detections_last_hour", "note", "Recent calling activity")),
+    (compact_number(summary.get("species_7d")), wording(copy.get("metrics", {}), "species_7d", "label", "Species this week"), wording(copy.get("metrics", {}), "species_7d", "note", "Rolling seven-day total")),
 ]
 st.markdown(
     '<div class="metric-grid">'
@@ -410,7 +455,7 @@ st.markdown(
 left, right = st.columns([0.82, 1.35], gap="medium")
 with left:
     with st.container(border=True):
-        panel_heading("Latest detection", "The most recent high-quality acoustic match.")
+        panel_heading(wording(copy.get("sections", {}), "latest", "title", "Latest detection"), wording(copy.get("sections", {}), "latest", "description", "Most recent confident match."))
         latest = data.get("latest")
         if latest:
             confidence = latest.get("confidence")
@@ -430,11 +475,11 @@ with left:
                 unsafe_allow_html=True,
             )
         else:
-            empty_state("No cleaned detections are available yet today.")
+            empty_state(wording(copy.get("sections", {}), "latest", "empty", "No confident detections yet today."))
 
 with right:
     with st.container(border=True):
-        panel_heading("Activity today", "The rhythm of detections since midnight.")
+        panel_heading(wording(copy.get("sections", {}), "activity", "title", "Activity today"), wording(copy.get("sections", {}), "activity", "description", "Detections by hour since midnight."))
         hourly = frame(data.get("activity_hourly", []))
         if not hourly.empty and {"hour", "detections"}.issubset(hourly.columns):
             hourly["hour"] = pd.to_datetime(hourly["hour"], errors="coerce")
@@ -467,14 +512,14 @@ with right:
             chart = alt.layer(*layers).properties(height=265).configure_view(stroke=None).configure_axis(
                 gridColor=GRID, domain=False, tickColor=GRID, labelColor=MUTED, titleColor=MUTED
             )
-            st.altair_chart(chart, use_container_width=True)
+            st.altair_chart(chart, width="stretch")
         else:
-            empty_state("Hourly activity will appear after the first detections.")
+            empty_state(wording(copy.get("sections", {}), "activity", "empty", "Hourly activity will appear after the first detections."))
 
 left, right = st.columns([1.1, 0.9], gap="medium")
 with left:
     with st.container(border=True):
-        panel_heading("Today's acoustic community", "The species heard most often in the cleaned data.")
+        panel_heading(wording(copy.get("sections", {}), "community", "title", "Birds heard today"), wording(copy.get("sections", {}), "community", "description", "The species detected most often so far."))
         species = frame(data.get("species_today", []))
         if not species.empty and {"common_name", "detections"}.issubset(species.columns):
             species = species.sort_values("detections", ascending=True).tail(10)
@@ -490,23 +535,23 @@ with left:
                 .configure_view(stroke=None)
                 .configure_axis(gridColor=GRID, domain=False, tickColor=GRID, labelColor=MUTED, titleColor=MUTED)
             )
-            st.altair_chart(ranking, use_container_width=True)
+            st.altair_chart(ranking, width="stretch")
         else:
-            empty_state("The species ranking will build through the day.")
+            empty_state(wording(copy.get("sections", {}), "community", "empty", "The species list will build through the day."))
 
 with right:
     with st.container(border=True):
-        panel_heading("Garden weather", "Conditions nearest the latest observation.")
+        panel_heading(wording(copy.get("sections", {}), "weather", "title", "Garden weather"), wording(copy.get("sections", {}), "weather", "description", "Conditions at the latest weather check."))
         weather = data.get("weather") or {}
         if weather:
             temperature = weather.get("temperature")
             humidity = weather.get("humidity")
             wind = weather.get("wind_speed")
             values = [
-                ("—" if temperature is None else f"{float(temperature):.1f}°", "Temperature"),
-                ("—" if humidity is None else f"{float(humidity):.0f}%", "Humidity"),
-                ("—" if wind is None else f"{float(wind):.1f} m/s", "Wind"),
-                (weather.get("condition") or "—", "Conditions"),
+                ("—" if temperature is None else f"{float(temperature):.1f}°", wording(copy, "weather_labels", "temperature", "Temperature")),
+                ("—" if humidity is None else f"{float(humidity):.0f}%", wording(copy, "weather_labels", "humidity", "Humidity")),
+                ("—" if wind is None else f"{float(wind):.1f} m/s", wording(copy, "weather_labels", "wind", "Wind")),
+                (weather.get("condition") or "—", wording(copy, "weather_labels", "conditions", "Conditions")),
             ]
             st.markdown(
                 '<div class="weather-strip">'
@@ -515,9 +560,9 @@ with right:
                 unsafe_allow_html=True,
             )
         else:
-            empty_state("Weather will appear with the next public update.")
+            empty_state(wording(copy.get("sections", {}), "weather", "empty", "Weather will appear with the next update."))
 
-        panel_heading("Detection quality", "Only Strong and Probable matches are published.")
+        panel_heading(wording(copy.get("sections", {}), "quality", "title", "Detection quality"), wording(copy.get("sections", {}), "quality", "description", "Only Strong and Probable matches are shown."))
         quality = frame(data.get("quality_counts", []))
         if not quality.empty and {"quality", "count"}.issubset(quality.columns):
             qchart = (
@@ -535,14 +580,14 @@ with right:
                 .properties(height=245)
                 .configure_view(stroke=None)
             )
-            st.altair_chart(qchart, use_container_width=True)
+            st.altair_chart(qchart, width="stretch")
         else:
-            empty_state("Quality totals will appear with live data.")
+            empty_state(wording(copy.get("sections", {}), "quality", "empty", "Quality totals will appear with live data."))
 
 left, right = st.columns([1.25, 0.75], gap="medium")
 with left:
     with st.container(border=True):
-        panel_heading("Species rhythm", "When today's most active species were heard.")
+        panel_heading(wording(copy.get("sections", {}), "rhythm", "title", "When birds were active"), wording(copy.get("sections", {}), "rhythm", "description", "The hours when today's leading species were heard."))
         heatmap = frame(data.get("species_heatmap", []))
         if not heatmap.empty and {"common_name", "hour", "detections"}.issubset(heatmap.columns):
             heatmap["hour_label"] = pd.to_datetime(heatmap["hour"], errors="coerce").dt.strftime("%H")
@@ -560,13 +605,13 @@ with left:
                 .configure_view(stroke=None)
                 .configure_axis(domain=False, tickColor=GRID, labelColor=MUTED, titleColor=MUTED)
             )
-            st.altair_chart(rhythm, use_container_width=True)
+            st.altair_chart(rhythm, width="stretch")
         else:
-            empty_state("A daily activity pattern will emerge as detections arrive.")
+            empty_state(wording(copy.get("sections", {}), "rhythm", "empty", "Activity patterns will appear as detections arrive."))
 
 with right:
     with st.container(border=True):
-        panel_heading("Recent activity", "Latest cleaned detections. Audio is kept private.")
+        panel_heading(wording(copy.get("sections", {}), "recent", "title", "Recently heard"), wording(copy.get("sections", {}), "recent", "description", "Latest confident matches. Recordings stay private."))
         recent = data.get("recent", [])[:8]
         if recent:
             rows = []
@@ -581,17 +626,15 @@ with right:
                 )
             st.markdown("".join(rows), unsafe_allow_html=True)
         else:
-            empty_state("Recent activity will appear here.")
+            empty_state(wording(copy.get("sections", {}), "recent", "empty", "Recent detections will appear here."))
 
 st.markdown(
-    """
-<div class="method-note"><strong>How to read this observatory.</strong> A detection is a short acoustic match made by BirdNET. Several detections may come from the same bird, so these figures describe calling activity—not abundance or the number of birds present. Lower-confidence and unusual matches remain private for review.</div>
-""",
+    f'<div class="method-note"><strong>{esc(wording(copy, "method", "title", "About these numbers."))}</strong> '
+    f'{esc(wording(copy, "method", "body", "BirdNET can record the same bird more than once. These charts show detected calls, not a count of individual birds. Less certain matches are held back for checking."))}</div>',
     unsafe_allow_html=True,
 )
 st.markdown(
-    f'<footer class="footer"><span>North West Wales Garden · approximate location only</span>'
-    f'<span>Privacy-filtered snapshot · refreshes every 10 minutes</span></footer>',
+    f'<footer class="footer"><span>{esc(wording(copy, "footer", "location", "North West Wales Garden · approximate location only"))}</span>'
+    f'<span>{esc(wording(copy, "footer", "data", "Privacy-filtered data · refreshed every 10 minutes"))}</span></footer>',
     unsafe_allow_html=True,
 )
-

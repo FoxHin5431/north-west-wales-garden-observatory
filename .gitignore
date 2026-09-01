@@ -28,4 +28,4 @@ clips/
 .vscode/
 .DS_Store
 Thumbs.db
-
+.data-publish/

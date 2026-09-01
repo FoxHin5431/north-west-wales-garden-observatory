@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "title": "Listening to\nthe garden.",
+    "description": "Birds heard from a garden in North West Wales, recorded through the day.",
+    "eyebrow_suffix": "acoustic observatory",
+    "live_chip": "Observatory live",
+    "data_chip": "Checked detections"
+  },
+  "status": {
+    "waiting": "Waiting for live data",
+    "updated_prefix": "Updated",
+    "setup_message": "The page is ready. Data will appear after the garden monitor sends its first update."
+  },
+  "metrics": {
+    "detections_today": {
+      "label": "Detections today",
+      "note": "Recorded calls, not individual birds"
+    },
+    "species_today": {
+      "label": "Species today",
+      "note": "Species in the checked results"
+    },
+    "detections_last_hour": {
+      "label": "Last hour",
+      "note": "Recent calling activity"
+    },
+    "species_7d": {
+      "label": "Species this week",
+      "note": "Rolling seven-day total"
+    }
+  },
+  "sections": {
+    "latest": {
+      "title": "Latest detection",
+      "description": "Most recent confident match.",
+      "empty": "No confident detections yet today."
+    },
+    "activity": {
+      "title": "Activity today",
+      "description": "Detections by hour since midnight.",
+      "empty": "Hourly activity will appear after the first detections."
+    },
+    "community": {
+      "title": "Birds heard today",
+      "description": "The species detected most often so far.",
+      "empty": "The species list will build through the day."
+    },
+    "weather": {
+      "title": "Garden weather",
+      "description": "Conditions at the latest weather check.",
+      "empty": "Weather will appear with the next update."
+    },
+    "quality": {
+      "title": "Detection quality",
+      "description": "Only Strong and Probable matches are shown.",
+      "empty": "Quality totals will appear with live data."
+    },
+    "rhythm": {
+      "title": "When birds were active",
+      "description": "The hours when today's leading species were heard.",
+      "empty": "Activity patterns will appear as detections arrive."
+    },
+    "recent": {
+      "title": "Recently heard",
+      "description": "Latest confident matches. Recordings stay private.",
+      "empty": "Recent detections will appear here."
+    }
+  },
+  "weather_labels": {
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "conditions": "Conditions"
+  },
+  "method": {
+    "title": "About these numbers.",
+    "body": "BirdNET can record the same bird more than once. These charts show detected calls, not a count of individual birds. Less certain matches are held back for checking."
+  },
+  "footer": {
+    "location": "North West Wales Garden · approximate location only",
+    "data": "Privacy-filtered data · refreshed every 10 minutes"
+  }
+}

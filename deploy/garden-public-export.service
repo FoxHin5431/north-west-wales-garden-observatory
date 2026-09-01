@@ -6,7 +6,6 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 User=pi
-WorkingDirectory=/opt/garden-observatory-public
-EnvironmentFile=/etc/garden-observatory-public.env
-ExecStart=/opt/garden-observatory-public/scripts/publish_snapshot.sh
-
+WorkingDirectory=/home/pi/garden-observatory-public
+EnvironmentFile=/home/pi/.config/garden-observatory-public.env
+ExecStart=/home/pi/garden-observatory-public/scripts/publish_snapshot.sh
