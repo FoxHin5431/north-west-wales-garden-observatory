@@ -74,6 +74,12 @@ COMMON_NAMES = {
     "Haematopus ostralegus": "Oystercatcher",
     "Numenius arquata": "Curlew",
     "Vanellus vanellus": "Lapwing",
+    "Anthus trivialis": "Tree Pipit",
+    "Phasianus colchicus": "Common Pheasant",
+    "Fulica atra": "Coot",
+    "Motacilla cinerea": "Grey Wagtail",
+    "Gallinula chloropus": "Moorhen",
+    "Melanitta nigra": "Common Scoter",
 }
 
 
