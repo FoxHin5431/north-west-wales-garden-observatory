@@ -637,10 +637,18 @@ with left:
                 .mark_bar(color=TEAL, cornerRadiusEnd=5, height=17)
                 .encode(
                     x=alt.X("detections:Q", title="Detections", axis=alt.Axis(tickMinStep=1)),
-                    y=alt.Y("common_name:N", title=None, sort=None),
+                    y=alt.Y(
+                        "common_name:N",
+                        title=None,
+                        sort=None,
+                        axis=alt.Axis(labelLimit=190, labelPadding=9, labelOverlap=False),
+                    ),
                     tooltip=["common_name:N", "scientific_name:N", "detections:Q"],
                 )
-                .properties(height=max(220, len(species) * 31))
+                .properties(
+                    height=max(250, len(species) * 35),
+                    padding={"left": 8, "right": 10, "top": 4, "bottom": 6},
+                )
                 .configure_view(stroke=None)
                 .configure_axis(gridColor=GRID, domain=False, tickColor=GRID, labelColor=MUTED, titleColor=MUTED)
             )
@@ -705,12 +713,24 @@ with left:
                 alt.Chart(heatmap)
                 .mark_rect(cornerRadius=2)
                 .encode(
-                    x=alt.X("hour_label:O", title="Hour", axis=alt.Axis(labelAngle=0)),
-                    y=alt.Y("common_name:N", title=None, sort="-x"),
+                    x=alt.X(
+                        "hour_label:O",
+                        title="Hour",
+                        axis=alt.Axis(labelAngle=0, labelOverlap="greedy", labelPadding=8),
+                    ),
+                    y=alt.Y(
+                        "common_name:N",
+                        title=None,
+                        sort="-x",
+                        axis=alt.Axis(labelLimit=190, labelPadding=10, labelOverlap=False),
+                    ),
                     color=alt.Color("detections:Q", scale=alt.Scale(range=["#edf1ea", "#2f6545"]), legend=None),
                     tooltip=["common_name:N", alt.Tooltip("hour_label:O", title="Hour"), "detections:Q"],
                 )
-                .properties(height=max(230, heatmap["common_name"].nunique() * 29))
+                .properties(
+                    height=max(280, heatmap["common_name"].nunique() * 40),
+                    padding={"left": 8, "right": 10, "top": 4, "bottom": 6},
+                )
                 .configure_view(stroke=None)
                 .configure_axis(domain=False, tickColor=GRID, labelColor=MUTED, titleColor=MUTED)
             )
