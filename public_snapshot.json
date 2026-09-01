@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "generated_at": "2026-09-13T09:00:37.696512+01:00",
+    "location_label": "North West Wales Garden",
+    "timezone": "Europe/London",
+    "demo": false
+  },
+  "summary": {
+    "detections_today": 199,
+    "species_today": 17,
+    "detections_last_hour": 76,
+    "species_7d": 47
+  },
+  "latest": {
+    "detected_at": "2026-09-13T08:57:41+01:00",
+    "common_name": "Dunnock",
+    "scientific_name": "Prunella modularis",
+    "confidence": 0.77,
+    "quality": "Strong",
+    "image": {
+      "url": "https://raw.githubusercontent.com/FoxHin5431/north-west-wales-garden-observatory/data/latest_species_5f772308f782.jpg",
+      "author_name": "Alexis Lours",
+      "license_name": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "source_provider": "avicommons"
+    }
+  },
+  "dawn": {
+    "civil_dawn": "2026-09-13T06:09:49.593736+01:00",
+    "sunrise": "2026-09-13T06:45:46.977766+01:00"
+  },
+  "weather": {
+    "observed_at": "2026-09-13T09:01:17+01:00",
+    "temperature": 17.07,
+    "humidity": 93.0,
+    "wind_speed": 3.58,
+    "condition": "overcast clouds"
+  },
+  "activity_hourly": [
+    {
+      "hour": "2026-09-13T00:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T01:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T02:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T03:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T04:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T05:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T06:00:00+01:00",
+      "detections": 55
+    },
+    {
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 67
+    },
+    {
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 77
+    },
+    {
+      "hour": "2026-09-13T09:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T10:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T11:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T12:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T13:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T14:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T15:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T16:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T17:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T18:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T19:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T20:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T21:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T22:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-13T23:00:00+01:00",
+      "detections": 0
+    }
+  ],
+  "species_today": [
+    {
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "detections": 93
+    },
+    {
+      "common_name": "Jackdaw",
+      "scientific_name": "Coloeus monedula",
+      "detections": 30
+    },
+    {
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "detections": 20
+    },
+    {
+      "common_name": "Dunnock",
+      "scientific_name": "Prunella modularis",
+      "detections": 18
+    },
+    {
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "detections": 9
+    },
+    {
+      "common_name": "Blue Tit",
+      "scientific_name": "Cyanistes caeruleus",
+      "detections": 7
+    },
+    {
+      "common_name": "Long-tailed Tit",
+      "scientific_name": "Aegithalos caudatus",
+      "detections": 5
+    },
+    {
+      "common_name": "Great Tit",
+      "scientific_name": "Parus major",
+      "detections": 3
+    },
+    {
+      "common_name": "Chaffinch",
+      "scientific_name": "Fringilla coelebs",
+      "detections": 3
+    },
+    {
+      "common_name": "Siskin",
+      "scientific_name": "Spinus spinus",
+      "detections": 2
+    },
+    {
+      "common_name": "Corvus cornix",
+      "scientific_name": "Corvus cornix",
+      "detections": 2
+    },
+    {
+      "common_name": "Carrion Crow",
+      "scientific_name": "Corvus corone",
+      "detections": 2
+    },
+    {
+      "common_name": "House Martin",
+      "scientific_name": "Delichon urbicum",
+      "detections": 1
+    },
+    {
+      "common_name": "Goldfinch",
+      "scientific_name": "Carduelis carduelis",
+      "detections": 1
+    },
+    {
+      "common_name": "Goldcrest",
+      "scientific_name": "Regulus regulus",
+      "detections": 1
+    },
+    {
+      "common_name": "Redwing",
+      "scientific_name": "Turdus iliacus",
+      "detections": 1
+    },
+    {
+      "common_name": "Anas platyrhynchos",
+      "scientific_name": "Anas platyrhynchos",
+      "detections": 1
+    }
+  ],
+  "species_heatmap": [
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 11
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 7
+    },
+    {
+      "common_name": "Great Tit",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 3
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-13T06:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 6
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 19
+    },
+    {
+      "common_name": "Long-tailed Tit",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Long-tailed Tit",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Magpie",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 12
+    },
+    {
+      "common_name": "Magpie",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 8
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-13T06:00:00+01:00",
+      "detections": 44
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 21
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-13T08:00:00+01:00",
+      "detections": 28
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-13T06:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-13T07:00:00+01:00",
+      "detections": 4
+    }
+  ],
+  "quality_counts": [
+    {
+      "quality": "Strong",
+      "count": 135
+    },
+    {
+      "quality": "Probable",
+      "count": 64
+    }
+  ],
+  "trend_7d": [
+    {
+      "date": "2026-09-06",
+      "detections": 422,
+      "species": 24
+    },
+    {
+      "date": "2026-09-07",
+      "detections": 409,
+      "species": 27
+    },
+    {
+      "date": "2026-09-08",
+      "detections": 414,
+      "species": 29
+    },
+    {
+      "date": "2026-09-09",
+      "detections": 435,
+      "species": 29
+    },
+    {
+      "date": "2026-09-10",
+      "detections": 457,
+      "species": 28
+    },
+    {
+      "date": "2026-09-11",
+      "detections": 817,
+      "species": 33
+    },
+    {
+      "date": "2026-09-12",
+      "detections": 727,
+      "species": 26
+    },
+    {
+      "date": "2026-09-13",
+      "detections": 199,
+      "species": 17
+    }
+  ],
+  "recent": [
+    {
+      "detected_at": "2026-09-13T08:57:41+01:00",
+      "common_name": "Dunnock",
+      "scientific_name": "Prunella modularis",
+      "confidence": 0.77,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:56:51+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.67,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-13T08:56:47+01:00",
+      "common_name": "Long-tailed Tit",
+      "scientific_name": "Aegithalos caudatus",
+      "confidence": 0.95,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:56:38+01:00",
+      "common_name": "Dunnock",
+      "scientific_name": "Prunella modularis",
+      "confidence": 0.86,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:56:35+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.76,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:55:39+01:00",
+      "common_name": "Dunnock",
+      "scientific_name": "Prunella modularis",
+      "confidence": 0.97,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:55:03+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.71,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-13T08:53:48+01:00",
+      "common_name": "Jackdaw",
+      "scientific_name": "Coloeus monedula",
+      "confidence": 0.93,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:51:59+01:00",
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "confidence": 0.88,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:49:57+01:00",
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "confidence": 0.97,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:49:21+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.77,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:49:20+01:00",
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "confidence": 0.84,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:49:05+01:00",
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "confidence": 0.82,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:48:57+01:00",
+      "common_name": "Jackdaw",
+      "scientific_name": "Coloeus monedula",
+      "confidence": 0.99,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:48:38+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.81,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:48:00+01:00",
+      "common_name": "Redwing",
+      "scientific_name": "Turdus iliacus",
+      "confidence": 0.96,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:47:57+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.66,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-13T08:47:36+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.66,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-13T08:46:32+01:00",
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "confidence": 0.91,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-13T08:45:55+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.64,
+      "quality": "Probable"
+    }
+  ]
+}
