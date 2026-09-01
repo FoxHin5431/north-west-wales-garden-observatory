@@ -1,0 +1,791 @@
+{
+  "schema_version": 1,
+  "meta": {
+    "generated_at": "2026-09-14T19:30:37.589692+01:00",
+    "location_label": "North West Wales Garden",
+    "timezone": "Europe/London",
+    "demo": false
+  },
+  "summary": {
+    "detections_today": 568,
+    "species_today": 29,
+    "detections_last_hour": 5,
+    "species_7d": 52
+  },
+  "latest": {
+    "detected_at": "2026-09-14T19:22:46+01:00",
+    "common_name": "Grey Heron",
+    "scientific_name": "Ardea cinerea",
+    "confidence": 0.85,
+    "quality": "Probable",
+    "image": {
+      "url": "https://raw.githubusercontent.com/FoxHin5431/north-west-wales-garden-observatory/data/latest_species_1eb4854d03c2.jpg",
+      "author_name": "Andreas Ranner",
+      "license_name": "CC BY-NC 2.5",
+      "license_url": "https://creativecommons.org/licenses/by-nc/2.5/",
+      "source_provider": "avicommons"
+    }
+  },
+  "dawn": {
+    "civil_dawn": "2026-09-14T06:11:37.683509+01:00",
+    "sunrise": "2026-09-14T06:47:30.409794+01:00"
+  },
+  "weather": {
+    "observed_at": "2026-09-14T19:00:27+01:00",
+    "temperature": 19.07,
+    "humidity": 81.0,
+    "wind_speed": 9.83,
+    "condition": "scattered clouds"
+  },
+  "activity_hourly": [
+    {
+      "hour": "2026-09-14T00:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T01:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T02:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T03:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T04:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T05:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 31
+    },
+    {
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 80
+    },
+    {
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 77
+    },
+    {
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 42
+    },
+    {
+      "hour": "2026-09-14T10:00:00+01:00",
+      "detections": 45
+    },
+    {
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 64
+    },
+    {
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 75
+    },
+    {
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 27
+    },
+    {
+      "hour": "2026-09-14T14:00:00+01:00",
+      "detections": 8
+    },
+    {
+      "hour": "2026-09-14T15:00:00+01:00",
+      "detections": 53
+    },
+    {
+      "hour": "2026-09-14T16:00:00+01:00",
+      "detections": 33
+    },
+    {
+      "hour": "2026-09-14T17:00:00+01:00",
+      "detections": 22
+    },
+    {
+      "hour": "2026-09-14T18:00:00+01:00",
+      "detections": 7
+    },
+    {
+      "hour": "2026-09-14T19:00:00+01:00",
+      "detections": 3
+    },
+    {
+      "hour": "2026-09-14T20:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T21:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T22:00:00+01:00",
+      "detections": 0
+    },
+    {
+      "hour": "2026-09-14T23:00:00+01:00",
+      "detections": 0
+    }
+  ],
+  "species_today": [
+    {
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "detections": 176
+    },
+    {
+      "common_name": "Jackdaw",
+      "scientific_name": "Coloeus monedula",
+      "detections": 148
+    },
+    {
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "detections": 76
+    },
+    {
+      "common_name": "Dunnock",
+      "scientific_name": "Prunella modularis",
+      "detections": 37
+    },
+    {
+      "common_name": "Corvus cornix",
+      "scientific_name": "Corvus cornix",
+      "detections": 26
+    },
+    {
+      "common_name": "Goldcrest",
+      "scientific_name": "Regulus regulus",
+      "detections": 21
+    },
+    {
+      "common_name": "Carrion Crow",
+      "scientific_name": "Corvus corone",
+      "detections": 15
+    },
+    {
+      "common_name": "Blue Tit",
+      "scientific_name": "Cyanistes caeruleus",
+      "detections": 13
+    },
+    {
+      "common_name": "Magpie",
+      "scientific_name": "Pica pica",
+      "detections": 11
+    },
+    {
+      "common_name": "Redwing",
+      "scientific_name": "Turdus iliacus",
+      "detections": 8
+    },
+    {
+      "common_name": "Long-tailed Tit",
+      "scientific_name": "Aegithalos caudatus",
+      "detections": 6
+    },
+    {
+      "common_name": "Goldfinch",
+      "scientific_name": "Carduelis carduelis",
+      "detections": 4
+    },
+    {
+      "common_name": "Tree Pipit",
+      "scientific_name": "Anthus trivialis",
+      "detections": 3
+    },
+    {
+      "common_name": "Coot",
+      "scientific_name": "Fulica atra",
+      "detections": 3
+    },
+    {
+      "common_name": "Moorhen",
+      "scientific_name": "Gallinula chloropus",
+      "detections": 2
+    },
+    {
+      "common_name": "Grey Wagtail",
+      "scientific_name": "Motacilla cinerea",
+      "detections": 2
+    },
+    {
+      "common_name": "Motacilla alba",
+      "scientific_name": "Motacilla alba",
+      "detections": 2
+    },
+    {
+      "common_name": "Alcedo atthis",
+      "scientific_name": "Alcedo atthis",
+      "detections": 2
+    },
+    {
+      "common_name": "Grey Heron",
+      "scientific_name": "Ardea cinerea",
+      "detections": 2
+    },
+    {
+      "common_name": "Great Spotted Woodpecker",
+      "scientific_name": "Dendrocopos major",
+      "detections": 2
+    },
+    {
+      "common_name": "Herring Gull",
+      "scientific_name": "Larus argentatus",
+      "detections": 1
+    },
+    {
+      "common_name": "Greenfinch",
+      "scientific_name": "Chloris chloris",
+      "detections": 1
+    },
+    {
+      "common_name": "Anas platyrhynchos",
+      "scientific_name": "Anas platyrhynchos",
+      "detections": 1
+    },
+    {
+      "common_name": "Mareca penelope",
+      "scientific_name": "Mareca penelope",
+      "detections": 1
+    },
+    {
+      "common_name": "Common Scoter",
+      "scientific_name": "Melanitta nigra",
+      "detections": 1
+    },
+    {
+      "common_name": "Common Pheasant",
+      "scientific_name": "Phasianus colchicus",
+      "detections": 1
+    },
+    {
+      "common_name": "Chiffchaff",
+      "scientific_name": "Phylloscopus collybita",
+      "detections": 1
+    },
+    {
+      "common_name": "Chaffinch",
+      "scientific_name": "Fringilla coelebs",
+      "detections": 1
+    },
+    {
+      "common_name": "Great Tit",
+      "scientific_name": "Parus major",
+      "detections": 1
+    }
+  ],
+  "species_heatmap": [
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Blue Tit",
+      "hour": "2026-09-14T15:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Carrion Crow",
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Carrion Crow",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Carrion Crow",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Carrion Crow",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 6
+    },
+    {
+      "common_name": "Carrion Crow",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Corvus cornix",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Corvus cornix",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Corvus cornix",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Corvus cornix",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 16
+    },
+    {
+      "common_name": "Corvus cornix",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 6
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 6
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 9
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T10:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T14:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Dunnock",
+      "hour": "2026-09-14T15:00:00+01:00",
+      "detections": 15
+    },
+    {
+      "common_name": "Goldcrest",
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 6
+    },
+    {
+      "common_name": "Goldcrest",
+      "hour": "2026-09-14T10:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Goldcrest",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Goldcrest",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Goldcrest",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 9
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 17
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 7
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T10:00:00+01:00",
+      "detections": 14
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 30
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 26
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T14:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T15:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T16:00:00+01:00",
+      "detections": 26
+    },
+    {
+      "common_name": "Jackdaw",
+      "hour": "2026-09-14T17:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T05:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 21
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 24
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 13
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T09:00:00+01:00",
+      "detections": 11
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T10:00:00+01:00",
+      "detections": 24
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 16
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 18
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T13:00:00+01:00",
+      "detections": 4
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T15:00:00+01:00",
+      "detections": 30
+    },
+    {
+      "common_name": "Robin",
+      "hour": "2026-09-14T17:00:00+01:00",
+      "detections": 14
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T06:00:00+01:00",
+      "detections": 5
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T07:00:00+01:00",
+      "detections": 32
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T08:00:00+01:00",
+      "detections": 23
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T11:00:00+01:00",
+      "detections": 2
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T12:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T16:00:00+01:00",
+      "detections": 3
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T17:00:00+01:00",
+      "detections": 1
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T18:00:00+01:00",
+      "detections": 7
+    },
+    {
+      "common_name": "Rook",
+      "hour": "2026-09-14T19:00:00+01:00",
+      "detections": 2
+    }
+  ],
+  "quality_counts": [
+    {
+      "quality": "Strong",
+      "count": 382
+    },
+    {
+      "quality": "Probable",
+      "count": 186
+    }
+  ],
+  "trend_7d": [
+    {
+      "date": "2026-09-07",
+      "detections": 409,
+      "species": 27
+    },
+    {
+      "date": "2026-09-08",
+      "detections": 414,
+      "species": 29
+    },
+    {
+      "date": "2026-09-09",
+      "detections": 435,
+      "species": 29
+    },
+    {
+      "date": "2026-09-10",
+      "detections": 457,
+      "species": 28
+    },
+    {
+      "date": "2026-09-11",
+      "detections": 817,
+      "species": 33
+    },
+    {
+      "date": "2026-09-12",
+      "detections": 727,
+      "species": 26
+    },
+    {
+      "date": "2026-09-13",
+      "detections": 975,
+      "species": 28
+    },
+    {
+      "date": "2026-09-14",
+      "detections": 568,
+      "species": 29
+    }
+  ],
+  "recent": [
+    {
+      "detected_at": "2026-09-14T19:22:46+01:00",
+      "common_name": "Grey Heron",
+      "scientific_name": "Ardea cinerea",
+      "confidence": 0.85,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-14T19:17:26+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.77,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T19:17:08+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.94,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:55:36+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.91,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:41:32+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.78,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:27:12+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.97,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:16:30+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.73,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-14T18:13:16+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.98,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:09:22+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.97,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T18:05:13+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.84,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:51:54+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.91,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:51:34+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.91,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:51:04+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.81,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:50:39+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.93,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:50:16+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.66,
+      "quality": "Probable"
+    },
+    {
+      "detected_at": "2026-09-14T17:49:00+01:00",
+      "common_name": "Rook",
+      "scientific_name": "Corvus frugilegus",
+      "confidence": 0.83,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:36:37+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.76,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:35:00+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.93,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:34:36+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.82,
+      "quality": "Strong"
+    },
+    {
+      "detected_at": "2026-09-14T17:34:10+01:00",
+      "common_name": "Robin",
+      "scientific_name": "Erithacus rubecula",
+      "confidence": 0.71,
+      "quality": "Probable"
+    }
+  ]
+}
