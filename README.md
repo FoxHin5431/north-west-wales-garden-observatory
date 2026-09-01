@@ -1,6 +1,6 @@
 # North West Wales Garden Observatory
 
-A privacy-safe public Streamlit view of acoustic bird activity from a garden in North West Wales.
+A live Streamlit view of acoustic bird activity from a garden in North West Wales.
 
 The public app deliberately publishes only a cleaned JSON snapshot and a small, attributed species reference image. It does **not** publish precise coordinates, garden photographs, raw BirdNET databases, audio, spectrograms, clip paths, host details, credentials, or lower-confidence review data.
 
