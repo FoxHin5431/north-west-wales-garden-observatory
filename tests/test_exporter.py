@@ -31,8 +31,12 @@ class ExporterTests(unittest.TestCase):
                         id INTEGER PRIMARY KEY, model_id INTEGER, label_id INTEGER,
                         detected_at INTEGER, confidence REAL, clip_name TEXT, unlikely INTEGER
                     );
+                    CREATE TABLE detection_reviews (
+                        id INTEGER PRIMARY KEY, detection_id INTEGER NOT NULL, verified TEXT NOT NULL
+                    );
                     INSERT INTO labels VALUES (1, 'Erithacus rubecula');
                     INSERT INTO model_labels VALUES (1, 1, 1, 'Erithacus rubecula_European Robin');
+                    INSERT INTO detection_reviews VALUES (1, 2, 'false_positive');
                     """
                 )
                 connection.executemany(
@@ -41,6 +45,7 @@ class ExporterTests(unittest.TestCase):
                         (1, now - 60, 0.95, 'private-audio.m4a', 0),
                         (2, now - 120, 0.91, 'private-audio-2.m4a', 0),
                         (3, now - 180, 0.20, 'review-only.m4a', 1),
+                        (4, now - 240, 0.99, 'unlikely-high-confidence.m4a', 1),
                     ],
                 )
                 connection.commit()
@@ -80,7 +85,7 @@ class ExporterTests(unittest.TestCase):
             payload = json.loads(output.read_text(encoding="utf-8"))
             serialised = json.dumps(payload)
             self.assertEqual(payload["latest"]["common_name"], "European Robin")
-            self.assertEqual(payload["summary"]["detections_today"], 2)
+            self.assertEqual(payload["summary"]["detections_today"], 1)
             self.assertEqual(payload["weather"]["condition"], "light cloud")
             self.assertNotIn("private-audio", serialised)
             self.assertNotIn("clip_name", serialised)

@@ -144,6 +144,18 @@ def load_detections(now: datetime) -> pd.DataFrame:
             model_label_join = ""
         clip_sql = "d.clip_name" if "clip_name" in detection_columns else "NULL"
         unlikely_sql = "d.unlikely" if "unlikely" in detection_columns else "0"
+        unlikely_filter = "AND COALESCE(d.unlikely, 0) = 0" if "unlikely" in detection_columns else ""
+        review_columns = columns(connection, "detection_reviews") if "detection_reviews" in available_tables else set()
+        false_positive_filter = ""
+        if {"detection_id", "verified"}.issubset(review_columns):
+            false_positive_filter = """
+                AND NOT EXISTS (
+                    SELECT 1
+                    FROM detection_reviews dr
+                    WHERE dr.detection_id = d.id
+                      AND dr.verified = 'false_positive'
+                )
+            """
         query = f"""
             SELECT d.detected_at, d.confidence, l.scientific_name,
                    {common_sql} AS common_name,
@@ -153,6 +165,8 @@ def load_detections(now: datetime) -> pd.DataFrame:
             JOIN labels l ON l.id = d.label_id
             {model_label_join}
             WHERE d.detected_at >= ?
+            {unlikely_filter}
+            {false_positive_filter}
             ORDER BY d.detected_at
         """
         rows = connection.execute(query, (int(start.timestamp()),)).fetchall()
@@ -166,6 +180,7 @@ def load_detections(now: datetime) -> pd.DataFrame:
     result["common_name"] = result["common_name"].fillna(mapped_names).fillna(result["scientific_name"])
     result["confidence"] = pd.to_numeric(result["confidence"], errors="coerce").fillna(0.0)
     result["unlikely"] = result["unlikely"].fillna(0).astype(bool)
+    result = result[~result["unlikely"]].copy()
 
     repeat_counts: list[int] = []
     for index, row in result.iterrows():
