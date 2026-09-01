@@ -319,13 +319,21 @@ h1, h2, h3, p { color: var(--ink); }
   height: 100%;
 }
 
-[data-testid="stVerticalBlockBorderWrapper"] {
+[data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stColumn"] [data-testid="stLayoutWrapper"] > [data-testid="stVerticalBlock"] {
   border-color: var(--line) !important;
   border-radius: 24px !important;
   background: rgba(251, 250, 246, .92) !important;
   box-shadow: 0 9px 28px rgba(44, 58, 48, .04);
 }
 [data-testid="stVerticalBlockBorderWrapper"] > div { padding: .35rem .4rem .45rem; }
+[data-testid="stColumn"] [data-testid="stLayoutWrapper"] {
+  height: 100%;
+}
+[data-testid="stColumn"] [data-testid="stLayoutWrapper"] > [data-testid="stVerticalBlock"] {
+  height: 100%;
+  padding: 1rem;
+}
 .panel-heading { margin: .15rem 0 .75rem; }
 .panel-heading h2 {
   margin: 0 0 .22rem;
