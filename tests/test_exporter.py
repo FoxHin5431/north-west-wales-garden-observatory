@@ -70,6 +70,7 @@ class ExporterTests(unittest.TestCase):
                     "GARDEN_LATITUDE": "1.0",
                     "GARDEN_LONGITUDE": "2.0",
                     "PUBLIC_SNAPSHOT_PATH": str(output),
+                    "PUBLIC_SPECIES_IMAGES": "0",
                 }
             )
             completed = subprocess.run(

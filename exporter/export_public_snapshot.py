@@ -9,8 +9,12 @@ import sqlite3
 from collections import Counter
 from contextlib import closing
 from datetime import datetime, timedelta
+from hashlib import sha256
 from pathlib import Path
 from tempfile import NamedTemporaryFile
+from urllib.error import HTTPError, URLError
+from urllib.parse import quote, urlencode, urlparse
+from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 import pandas as pd
@@ -24,6 +28,18 @@ LOCATION_LABEL = "North West Wales Garden"
 BIRDNET_DB = Path(os.environ["BIRDNET_DB"])
 WEATHER_DB = Path(os.environ["WEATHER_DB"])
 OUTPUT_PATH = Path(os.getenv("PUBLIC_SNAPSHOT_PATH", "data/public_snapshot.json"))
+BIRDNET_API_BASE_URL = os.getenv("BIRDNET_API_BASE_URL", "http://127.0.0.1:8080").rstrip("/")
+PUBLIC_IMAGE_BASE_URL = os.getenv(
+    "PUBLIC_IMAGE_BASE_URL",
+    "https://raw.githubusercontent.com/FoxHin5431/north-west-wales-garden-observatory/data",
+).rstrip("/")
+PUBLIC_SPECIES_IMAGES = os.getenv("PUBLIC_SPECIES_IMAGES", "1").lower() not in {"0", "false", "no"}
+MAX_SPECIES_IMAGE_BYTES = 2 * 1024 * 1024
+IMAGE_EXTENSIONS = {
+    "image/jpeg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+}
 
 # BirdNET-Go installations do not all store localized names in the database.
 # Keep the garden's small, curated UK list as a display fallback; any species
@@ -87,6 +103,83 @@ def readonly_connection(path: Path) -> sqlite3.Connection:
     connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
     connection.row_factory = sqlite3.Row
     return connection
+
+
+def safe_http_url(value: object) -> str:
+    text = str(value or "").strip()
+    parsed = urlparse(text)
+    return text if parsed.scheme in {"http", "https"} and parsed.netloc else ""
+
+
+def short_text(value: object, limit: int = 160) -> str:
+    return str(value or "").strip()[:limit]
+
+
+def fetch_species_image(scientific_name: str) -> tuple[bytes, str, dict] | None:
+    if not PUBLIC_SPECIES_IMAGES or not scientific_name:
+        return None
+
+    encoded_name = quote(scientific_name, safe="")
+    image_request = Request(
+        f"{BIRDNET_API_BASE_URL}/api/v2/media/image/{encoded_name}",
+        headers={"User-Agent": "North-West-Wales-Garden-Observatory/1.0"},
+    )
+    try:
+        with urlopen(image_request, timeout=6) as response:
+            content_type = response.headers.get_content_type().lower()
+            extension = IMAGE_EXTENSIONS.get(content_type)
+            image_bytes = response.read(MAX_SPECIES_IMAGE_BYTES + 1)
+        if extension is None or not image_bytes or len(image_bytes) > MAX_SPECIES_IMAGE_BYTES:
+            return None
+    except (HTTPError, URLError, OSError, TimeoutError):
+        return None
+
+    attribution: dict[str, str] = {}
+    info_request = Request(
+        f"{BIRDNET_API_BASE_URL}/api/v2/media/species-image/info?{urlencode({'name': scientific_name})}",
+        headers={"User-Agent": "North-West-Wales-Garden-Observatory/1.0"},
+    )
+    try:
+        with urlopen(info_request, timeout=6) as response:
+            info = json.loads(response.read(64 * 1024).decode("utf-8"))
+        attribution = {
+            "author_name": short_text(info.get("authorName")),
+            "author_url": safe_http_url(info.get("authorURL")),
+            "license_name": short_text(info.get("licenseName")),
+            "license_url": safe_http_url(info.get("licenseURL")),
+            "source_provider": short_text(info.get("sourceProvider")),
+        }
+        attribution = {key: value for key, value in attribution.items() if value}
+    except (HTTPError, URLError, OSError, TimeoutError, UnicodeDecodeError, json.JSONDecodeError):
+        pass
+
+    return image_bytes, extension, attribution
+
+
+def update_species_image(payload: dict) -> None:
+    latest = payload.get("latest")
+    result = fetch_species_image(str((latest or {}).get("scientific_name") or ""))
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    keep_path: Path | None = None
+    if result and latest:
+        image_bytes, extension, attribution = result
+        digest = sha256(image_bytes).hexdigest()[:12]
+        filename = f"latest_species_{digest}{extension}"
+        keep_path = OUTPUT_PATH.with_name(filename)
+        with NamedTemporaryFile("wb", dir=OUTPUT_PATH.parent, delete=False) as handle:
+            handle.write(image_bytes)
+            temporary = Path(handle.name)
+        temporary.replace(keep_path)
+        latest["image"] = {
+            "url": f"{PUBLIC_IMAGE_BASE_URL}/{filename}",
+            **attribution,
+        }
+
+    for extension in IMAGE_EXTENSIONS.values():
+        for candidate in OUTPUT_PATH.parent.glob(f"latest_species_*{extension}"):
+            if keep_path is None or candidate != keep_path:
+                candidate.unlink(missing_ok=True)
 
 
 def columns(connection: sqlite3.Connection, table: str) -> set[str]:
@@ -311,5 +404,7 @@ def write_atomic(payload: dict) -> None:
 
 
 if __name__ == "__main__":
-    write_atomic(build_snapshot(datetime.now(TIMEZONE)))
+    snapshot = build_snapshot(datetime.now(TIMEZONE))
+    update_species_image(snapshot)
+    write_atomic(snapshot)
     print(f"Wrote privacy-filtered snapshot to {OUTPUT_PATH}")

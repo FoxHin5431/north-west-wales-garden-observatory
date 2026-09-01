@@ -7,10 +7,16 @@ cd "$source_repo"
 
 "${EXPORT_PYTHON:-python3}" exporter/export_public_snapshot.py
 
-# The data branch contains one file and one replaceable commit. Amending avoids
-# building an ever-growing public history from ten-minute observations.
+# The data branch contains only the snapshot and current species thumbnail in
+# one replaceable commit. Amending avoids an ever-growing public history.
 cd "$data_repo"
 git add -- public_snapshot.json
+git add -u -- 'latest_species_*' 2>/dev/null || true
+for image in latest_species_*.jpg latest_species_*.png latest_species_*.webp; do
+  if [[ -f "$image" ]]; then
+    git add -- "$image"
+  fi
+done
 if git diff --cached --quiet; then
   exit 0
 fi

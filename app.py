@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import altair as alt
 import pandas as pd
@@ -98,6 +99,32 @@ def wording(source: dict[str, Any], section: str, key: str, default: str) -> str
 
 def esc(value: Any) -> str:
     return html.escape(str(value or ""))
+
+
+def safe_http_url(value: Any) -> str:
+    text = str(value or "").strip()
+    parsed = urlparse(text)
+    return text if parsed.scheme in {"http", "https"} and parsed.netloc else ""
+
+
+def linked_text(label: Any, url: Any) -> str:
+    clean_label = esc(label)
+    clean_url = safe_http_url(url)
+    if not clean_label:
+        return ""
+    if not clean_url:
+        return clean_label
+    return f'<a href="{esc(clean_url)}" target="_blank" rel="noopener noreferrer">{clean_label}</a>'
+
+
+def photo_credit(image: dict[str, Any]) -> str:
+    provider = str(image.get("source_provider") or "").replace("_", " ").title()
+    parts = [
+        linked_text(image.get("author_name"), image.get("author_url")),
+        linked_text(image.get("license_name"), image.get("license_url")),
+        esc(provider),
+    ]
+    return " · ".join(part for part in parts if part)
 
 
 def parse_time(value: Any) -> pd.Timestamp | None:
@@ -260,6 +287,8 @@ h1, h2, h3, p { color: var(--ink); }
   margin: .8rem 0;
 }
 .metric-card {
+  display: flex;
+  flex-direction: column;
   min-height: 118px;
   padding: 1.15rem 1.25rem;
   border: 1px solid var(--line);
@@ -276,7 +305,19 @@ h1, h2, h3, p { color: var(--ink); }
   line-height: 1;
 }
 .metric-label { color: var(--muted); font-size: .82rem; font-weight: 600; }
-.metric-note { margin-top: .38rem; color: #8b958f; font-size: .72rem; }
+.metric-note { margin-top: auto; padding-top: .38rem; color: #8b958f; font-size: .72rem; }
+
+[data-testid="stHorizontalBlock"] { align-items: stretch; }
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] { display: flex; }
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"] > div {
+  display: flex;
+  width: 100%;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+[data-testid="stHorizontalBlock"] [data-testid="stVerticalBlockBorderWrapper"] {
+  height: 100%;
+}
 
 [data-testid="stVerticalBlockBorderWrapper"] {
   border-color: var(--line) !important;
@@ -299,6 +340,29 @@ h1, h2, h3, p { color: var(--ink); }
   padding: .5rem 0 .65rem;
   border-bottom: 1px solid var(--line);
 }
+.latest-content.has-image {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 138px;
+  gap: 1rem;
+  align-items: start;
+}
+.species-photo { margin: 0; }
+.species-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: var(--surface-soft);
+}
+.species-photo figcaption {
+  margin-top: .38rem;
+  color: #7a857e;
+  font-size: .61rem;
+  line-height: 1.35;
+}
+.species-photo figcaption a { color: #5c7365; text-decoration-thickness: 1px; }
 .latest-species h3 {
   margin: 0;
   font-family: "Newsreader", Georgia, serif;
@@ -333,7 +397,15 @@ h1, h2, h3, p { color: var(--ink); }
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: .55rem;
 }
-.weather-item { padding: .8rem; border-radius: 16px; background: #f0f1eb; }
+.weather-item {
+  display: flex;
+  min-height: 82px;
+  padding: .8rem;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  background: #f0f1eb;
+}
 .weather-item strong { display: block; color: var(--ink); font-size: 1.25rem; }
 .weather-item span { color: var(--muted); font-size: .7rem; font-weight: 600; }
 
@@ -387,6 +459,10 @@ h1, h2, h3, p { color: var(--ink); }
   .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .weather-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer { flex-direction: column; }
+}
+@media (max-width: 520px) {
+  .latest-content.has-image { grid-template-columns: 1fr; }
+  .species-photo img { max-height: 210px; }
 }
 </style>
 """,
@@ -460,8 +536,22 @@ with left:
         if latest:
             confidence = latest.get("confidence")
             confidence_text = "—" if confidence is None else f"{float(confidence):.0%} confidence"
+            image = latest.get("image") if isinstance(latest.get("image"), dict) else {}
+            image_url = safe_http_url(image.get("url"))
+            image_html = ""
+            if image_url:
+                species_name = latest.get("common_name") or latest.get("scientific_name") or "bird"
+                credit = photo_credit(image)
+                caption = f"<figcaption>{credit}</figcaption>" if credit else ""
+                image_html = (
+                    f'<figure class="species-photo"><img src="{esc(image_url)}" '
+                    f'alt="Reference photograph of {esc(species_name)}">{caption}</figure>'
+                )
+            content_class = "latest-content has-image" if image_html else "latest-content"
             st.markdown(
                 f"""
+<div class="{content_class}">
+<div>
 <div class="latest-species">
   <h3>{esc(latest.get('common_name') or latest.get('scientific_name') or 'Unknown species')}</h3>
   <div class="latin">{esc(latest.get('scientific_name'))}</div>
@@ -470,6 +560,9 @@ with left:
   <span class="status-pill">{esc(latest.get('quality', 'Cleaned'))}</span>
   <span class="detail-pill">{esc(clock(latest.get('detected_at')))}</span>
   <span class="detail-pill">{esc(confidence_text)}</span>
+</div>
+</div>
+{image_html}
 </div>
 """,
                 unsafe_allow_html=True,

@@ -2,7 +2,7 @@
 
 A privacy-safe public Streamlit view of acoustic bird activity from a garden in North West Wales.
 
-The public app deliberately publishes only a cleaned JSON snapshot. It does **not** publish precise coordinates, raw BirdNET databases, audio, spectrograms, clip paths, host details, credentials, or lower-confidence review data.
+The public app deliberately publishes only a cleaned JSON snapshot and a small, attributed species reference image. It does **not** publish precise coordinates, garden photographs, raw BirdNET databases, audio, spectrograms, clip paths, host details, credentials, or lower-confidence review data.
 
 ## Run the public app
 
@@ -17,7 +17,7 @@ On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1`.
 
 ## Public data boundary
 
-`data/public_snapshot.json` is the only generated file intended for publication. It contains:
+The generated public data consists of `data/public_snapshot.json` and, when available, one species reference image. It contains:
 
 - the broad label `North West Wales Garden`
 - cleaned Strong and Probable detections
@@ -25,6 +25,7 @@ On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1`.
 - a short recent-detections list without IDs or media
 - broad weather observations
 - civil dawn and sunrise times
+- a BirdNET-Go species thumbnail with its supplied photographer and licence details
 
 The exporter requires exact coordinates only while it runs privately on the garden monitor to calculate solar times. Coordinates are never written to the snapshot.
 
