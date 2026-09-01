@@ -19,7 +19,7 @@ DATA_PATH = Path(os.getenv("GARDEN_DATA_PATH", APP_ROOT / "data" / "public_snaps
 CONTENT_PATH = APP_ROOT / "content" / "site_text.json"
 PUBLIC_DATA_URL = os.getenv(
     "GARDEN_DATA_URL",
-    "https://raw.githubusercontent.com/FoxHin5431/north-west-wales-garden-observatory/data/public_snapshot.json",
+    "https://api.github.com/repos/FoxHin5431/north-west-wales-garden-observatory/contents/public_snapshot.json?ref=data",
 )
 REFRESH_MS = 10 * 60 * 1000
 
@@ -49,7 +49,15 @@ def load_snapshot(path: str, modified_ns: int) -> dict[str, Any]:
 
 @st.cache_data(ttl=300, show_spinner=False)
 def load_remote_snapshot(url: str) -> dict[str, Any]:
-    response = requests.get(url, timeout=8)
+    headers = {"User-Agent": "North-West-Wales-Garden-Observatory/1.0"}
+    if url.startswith("https://api.github.com/"):
+        headers.update(
+            {
+                "Accept": "application/vnd.github.raw",
+                "X-GitHub-Api-Version": "2022-11-28",
+            }
+        )
+    response = requests.get(url, headers=headers, timeout=8)
     response.raise_for_status()
     return response.json()
 
